@@ -27,7 +27,7 @@ function redirect($url) {
 
 // Helper function to format currency
 function formatCurrency($amount) {
-    return '$' . number_format($amount, 2);
+    return '৳' . number_format($amount, 0);
 }
 
 // Helper function to sanitize input

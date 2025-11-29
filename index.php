@@ -21,9 +21,10 @@ $cartCount = $cart->getItemCount();
             theme: {
                 extend: {
                     colors: {
-                        primary: '#ff6b35',
-                        secondary: '#f7931e',
-                        dark: '#2d3436',
+                        primary: '#FF6B35',
+                        secondary: '#F7931E',
+                        accent: '#E63946',
+                        dark: '#1A1A2E',
                     }
                 }
             }
@@ -39,48 +40,49 @@ $cartCount = $cart->getItemCount();
 <body class="bg-gray-50">
     <!-- Navigation -->
     <nav class="navbar bg-white shadow-lg sticky top-0 z-50 transition-all duration-300">
-        <div class="container mx-auto px-4 py-4">
+        <div class="container mx-auto px-6 py-3">
             <div class="flex justify-between items-center">
                 <div class="nav-brand flex items-center gap-3 text-2xl font-bold text-primary cursor-pointer">
-                    <i class="fas fa-utensils text-3xl"></i>
+                    <i class="fas fa-utensils text-2xl"></i>
                     <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Swift Serve</span>
                 </div>
                 
-                <div class="hidden md:flex nav-menu gap-8">
-                    <a href="index.php" class="nav-link text-dark hover:text-primary transition-colors relative group">
-                        Home
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
-                    </a>
-                    <a href="#menu" class="nav-link text-dark hover:text-primary transition-colors relative group">
-                        Menu
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
-                    </a>
-                    <a href="#about" class="nav-link text-dark hover:text-primary transition-colors relative group">
-                        About
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
-                    </a>
-                    <a href="#contact" class="nav-link text-dark hover:text-primary transition-colors relative group">
-                        Contact
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
-                    </a>
-                </div>
-                
-                <div class="flex items-center gap-4">
-                    <div class="search-box relative hidden lg:block">
-                        <input type="text" id="searchInput" placeholder="Search food..." 
-                               class="pl-4 pr-10 py-2 border-2 border-gray-200 rounded-full focus:border-primary focus:outline-none transition-all duration-300 w-48 focus:w-64">
-                        <i class="fas fa-search absolute right-4 top-1/2 -translate-y-1/2 text-primary"></i>
+                <div class="flex items-center gap-6">
+                    <div class="hidden md:flex items-center gap-8">
+                        <a href="index.php" class="nav-link text-dark hover:text-primary transition-colors relative group py-2">
+                            Home
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+                        </a>
+                        <a href="#menu" class="nav-link text-dark hover:text-primary transition-colors relative group py-2">
+                            Menu
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+                        </a>
+                        <a href="#about" class="nav-link text-dark hover:text-primary transition-colors relative group py-2">
+                            About
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+                        </a>
+                        <a href="#contact" class="nav-link text-dark hover:text-primary transition-colors relative group py-2">
+                            Contact
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+                        </a>
                     </div>
+                
+                    <div class="flex items-center gap-4">
+                        <div class="search-box relative hidden lg:block">
+                            <input type="text" id="searchInput" placeholder="Search food..." 
+                                   class="pl-4 pr-10 py-2.5 border-2 border-gray-200 rounded-full focus:border-primary focus:outline-none transition-all duration-300 w-48 focus:w-64 text-sm">
+                            <i class="fas fa-search absolute right-4 top-1/2 -translate-y-1/2 text-primary"></i>
+                        </div>
                     
-                    <a href="cart.php" class="cart-icon relative text-dark text-xl hover:text-primary transition-all hover:scale-110">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span class="cart-badge absolute -top-2 -right-2 bg-primary text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold animate-pulse" id="cartBadge"><?php echo $cartCount; ?></span>
+                    <a href="cart.php" class="cart-icon relative text-dark hover:text-primary transition-all hover:scale-110 p-2">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span class="cart-badge absolute -top-1 -right-1 bg-primary text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold animate-pulse" id="cartBadge"><?php echo $cartCount; ?></span>
                     </a>
                     
                     <?php if (isLoggedIn()): ?>
                         <div class="user-menu relative group">
-                            <button class="user-btn bg-gradient-to-r from-primary to-secondary text-white px-4 py-2 rounded-full flex items-center gap-2 hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl">
-                                <i class="fas fa-user"></i>
+                            <button class="user-btn bg-gradient-to-r from-primary to-secondary text-white px-5 py-2.5 rounded-full flex items-center gap-2 hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl text-sm font-semibold">
+                                <i class="fas fa-user text-sm"></i>
                                 <span class="hidden sm:inline"><?php echo $_SESSION['user_name']; ?></span>
                             </button>
                             <div class="dropdown-menu absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden">
@@ -105,6 +107,7 @@ $cartCount = $cart->getItemCount();
                             Login
                         </a>
                     <?php endif; ?>
+                    </div>
                 </div>
             </div>
         </div>
