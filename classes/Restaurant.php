@@ -57,7 +57,7 @@ class Restaurant {
                     </div>
                     <div class="restaurant-info">
                         <span><i class="fas fa-clock"></i> <?php echo htmlspecialchars($this->deliveryTime); ?></span>
-                        <span><i class="fas fa-dollar-sign"></i> Min $<?php echo $this->minOrder; ?></span>
+                        <span><i class="fas fa-bangladeshi-taka-sign"></i> Min ৳<?php echo $this->minOrder; ?></span>
                     </div>
                 </div>
             </div>
@@ -79,14 +79,17 @@ class RestaurantsSection {
     public function __construct() {
         $this->title = 'Popular Restaurants';
         $this->subtitle = 'Discover amazing food from local restaurants';
-        $this->categories = ['All', 'Fast Food', 'Asian', 'Italian', 'Mexican', 'American', 'Desserts'];
+        $this->categories = ['All', 'Biryani', 'Bengali', 'Fast Food', 'Chinese', 'Indian', 'Desserts'];
         $this->restaurants = [
-            new Restaurant(1, "Burger Palace", "Fast Food", 4.8, "20-30 min", 10, "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500&h=400&fit=crop", "Juicy burgers and crispy fries"),
-            new Restaurant(2, "Sushi Master", "Asian", 4.9, "30-40 min", 15, "https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=500&h=400&fit=crop", "Fresh sushi and authentic Japanese cuisine"),
-            new Restaurant(3, "Pizza Heaven", "Italian", 4.7, "25-35 min", 12, "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500&h=400&fit=crop", "Wood-fired pizzas and pasta"),
-            new Restaurant(4, "Taco Fiesta", "Mexican", 4.6, "15-25 min", 8, "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=500&h=400&fit=crop", "Authentic Mexican street food"),
-            new Restaurant(5, "The Grill House", "American", 4.8, "30-40 min", 15, "https://images.unsplash.com/photo-1544025162-d76694265947?w=500&h=400&fit=crop", "Premium steaks and BBQ"),
-            new Restaurant(6, "Sweet Treats", "Desserts", 4.9, "15-20 min", 5, "https://images.unsplash.com/photo-1486427944299-d1955d23e34d?w=500&h=400&fit=crop", "Cakes, pastries, and ice cream")
+            new Restaurant(1, "Kacchi Bhai", "Biryani", 4.7, "30-45 min", 250, "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=500&h=400&fit=crop", "Famous for authentic Kacchi Biryani"),
+            new Restaurant(2, "Haji Biriyani", "Biryani", 4.6, "35-50 min", 200, "https://images.unsplash.com/photo-1633945274309-2c8a9c6e3f7d?w=500&h=400&fit=crop", "Legendary Old Dhaka biryani since 1939"),
+            new Restaurant(3, "Kasturi Restaurant", "Bengali", 4.8, "25-40 min", 300, "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=500&h=400&fit=crop", "Traditional Bengali cuisine"),
+            new Restaurant(4, "Takeout Dhaka", "Fast Food", 4.5, "20-35 min", 150, "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500&h=400&fit=crop", "Burgers, fries and American fast food"),
+            new Restaurant(5, "Spice & Rice", "Chinese", 4.7, "30-45 min", 280, "https://images.unsplash.com/photo-1525755662778-989d0524087e?w=500&h=400&fit=crop", "Thai and Chinese fusion"),
+            new Restaurant(6, "Khana's", "Indian", 4.6, "25-40 min", 250, "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=500&h=400&fit=crop", "North Indian cuisine and tandoor"),
+            new Restaurant(7, "Coopers Chocolate House", "Desserts", 4.8, "15-30 min", 120, "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=500&h=400&fit=crop", "Premium desserts and chocolates"),
+            new Restaurant(8, "Chillox", "Fast Food", 4.5, "20-35 min", 200, "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=500&h=400&fit=crop", "Popular local burger joint"),
+            new Restaurant(9, "Star Kabab", "Bengali", 4.7, "25-40 min", 180, "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=500&h=400&fit=crop", "Grilled kebabs and BBQ specials")
         ];
     }
     

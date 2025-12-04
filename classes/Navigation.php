@@ -32,10 +32,27 @@ class Navigation {
                 <a class="navbar-brand fw-bold" href="#" data-aos="fade-right">
                     <i class="fas fa-bolt text-primary"></i> <?php echo htmlspecialchars($this->brand); ?>
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
+                
+                <!-- Always visible buttons (cart and login) -->
+                <div class="d-flex align-items-center order-lg-2">
+                    <div id="loginButtonContainer">
+                        <button class="btn btn-login me-2" data-bs-toggle="modal" data-bs-target="#loginModal">
+                            <i class="fas fa-user me-2"></i>Login
+                        </button>
+                    </div>
+                    <div id="userProfileContainer" style="display: none;">
+                    </div>
+                    <?php if ($this->showThemeToggle): ?>
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <?php endif; ?>
+                    <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+                
+                <div class="collapse navbar-collapse order-lg-1" id="navbarNav">
                     <ul class="navbar-nav ms-auto align-items-center">
                         <?php foreach ($this->menuItems as $item): ?>
                         <li class="nav-item">
@@ -45,13 +62,11 @@ class Navigation {
                             </a>
                         </li>
                         <?php endforeach; ?>
-                        <?php if ($this->showThemeToggle): ?>
                         <li class="nav-item ms-3">
-                            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-                                <i class="fas fa-moon"></i>
+                            <button class="btn btn-search" id="searchFoodBtn" aria-label="Search Food">
+                                <i class="fas fa-search me-2"></i>Search Food
                             </button>
                         </li>
-                        <?php endif; ?>
                     </ul>
                 </div>
             </div>

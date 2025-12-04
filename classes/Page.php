@@ -51,10 +51,21 @@ class Page {
         <!-- Custom CSS -->
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/delivery.css">
+        <link rel="stylesheet" href="assets/css/deals.css">
         <link rel="stylesheet" href="assets/css/customizer.css">
+        <link rel="stylesheet" href="assets/css/auth.css">
+        <link rel="stylesheet" href="assets/css/profile.css">
         
         <!-- AOS Animation Library -->
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+        
+        <!-- Leaflet Maps (OpenStreetMap) -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+        
+        <!-- Leaflet Geocoder for Address Search -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+        <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
         <?php
     }
     
@@ -70,6 +81,9 @@ class Page {
         <script src="assets/js/main.js"></script>
         <script src="assets/js/customizer.js"></script>
         <script src="assets/js/food-filter.js"></script>
+        <script src="assets/js/location.js"></script>
+        <script src="assets/js/auth.js"></script>
+        <script src="assets/js/profile.js"></script>
         <?php
     }
 }

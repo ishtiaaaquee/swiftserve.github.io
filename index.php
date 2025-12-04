@@ -19,7 +19,10 @@ spl_autoload_register(function ($class) {
         'ContactSection' => 'Contact.php',
         'Contact' => 'Contact.php',
         'ModalsManager' => 'Modal.php',
-        'Modal' => 'Modal.php'
+        'Modal' => 'Modal.php',
+        'AuthModal' => 'AuthModal.php',
+        'UserProfile' => 'UserProfile.php',
+        'FeaturedDeals' => 'FeaturedDeals.php'
     ];
     
     // Check if class is in the map
@@ -43,6 +46,7 @@ $navigation = new Navigation('🍔 SwiftServe');
 
 // Food delivery sections
 $hero = new DeliveryHero();
+$featuredDeals = new FeaturedDeals();
 $howItWorks = new HowItWorks();
 $payment = new PaymentSection();
 $restaurants = new RestaurantsSection();
@@ -53,6 +57,8 @@ $appPromo = new AppPromo();
 $contact = new ContactSection();
 $footer = new Footer();
 $modals = new ModalsManager();
+$authModal = new AuthModal();
+$userProfile = new UserProfile();
 
 // Customize features for food delivery
 $features = new FeaturesSection();
@@ -74,6 +80,8 @@ $features->addFeature(new Feature('star', 'Quality Food', 'Only the best restaur
 
     <?php $hero->render(); ?>
 
+    <?php $featuredDeals->render(); ?>
+
     <?php $howItWorks->render(); ?>
 
     <?php $payment->render(); ?>
@@ -81,8 +89,6 @@ $features->addFeature(new Feature('star', 'Quality Food', 'Only the best restaur
     <?php $restaurants->render(); ?>
 
     <?php $popularDishes->render(); ?>
-
-    <?php $features->render(); ?>
 
     <?php $appPromo->render(); ?>
 
@@ -93,6 +99,10 @@ $features->addFeature(new Feature('star', 'Quality Food', 'Only the best restaur
     <?php $footer->render(); ?>
 
     <?php $modals->render(); ?>
+    
+    <?php $authModal->render(); ?>
+    
+    <?php $userProfile->render(); ?>
     
     <!-- Shopping Cart Sidebar -->
     <div class="cart-sidebar" id="cartSidebar">

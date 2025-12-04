@@ -209,6 +209,35 @@ body.dark-mode .glass-nav {
     box-shadow: var(--shadow-lg);
 }
 
+/* Search Food Button */
+.btn-search {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border: none;
+    color: white;
+    padding: 0.6rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+    white-space: nowrap;
+}
+
+.btn-search:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+    color: white;
+}
+
+.btn-search:active {
+    transform: translateY(0);
+}
+
+.btn-search i {
+    font-size: 0.9rem;
+}
+
 /* Hero Section */
 .hero-section {
     position: relative;

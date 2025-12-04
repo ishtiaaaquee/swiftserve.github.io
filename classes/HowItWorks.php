@@ -41,9 +41,9 @@ class HowItWorks {
                     <h2 class="section-title"><?php echo htmlspecialchars($this->title); ?></h2>
                     <p class="section-subtitle"><?php echo htmlspecialchars($this->subtitle); ?></p>
                 </div>
-                <div class="row g-4 align-items-center">
+                <div class="row g-4 align-items-center justify-content-center">
                     <?php foreach ($this->steps as $index => $step): ?>
-                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="<?php echo $index * 100; ?>">
+                    <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="<?php echo $index * 100; ?>">
                         <div class="how-it-works-card text-center">
                             <div class="step-number"><?php echo $index + 1; ?></div>
                             <div class="step-icon bg-<?php echo $step['color']; ?>">
@@ -54,7 +54,7 @@ class HowItWorks {
                         </div>
                     </div>
                     <?php if ($index < count($this->steps) - 1): ?>
-                    <div class="col-md-1 d-none d-md-block text-center">
+                    <div class="col-lg-1 col-md-1 d-none d-md-block text-center">
                         <i class="fas fa-arrow-right fa-2x text-primary"></i>
                     </div>
                     <?php endif; ?>

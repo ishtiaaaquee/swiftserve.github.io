@@ -1,0 +1,251 @@
+/* Authentication Modal Styles */
+.auth-modal {
+    border-radius: 16px;
+    border: none;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.2);
+}
+
+.auth-modal .modal-header {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border-radius: 16px 16px 0 0;
+    padding: 1.5rem;
+}
+
+.auth-modal .modal-header .btn-close {
+    filter: brightness(0) invert(1);
+}
+
+.auth-modal .modal-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.auth-modal .modal-body {
+    padding: 2rem;
+}
+
+.auth-modal .input-group-text {
+    background: #f8f9fa;
+    border-right: none;
+    color: var(--primary);
+}
+
+.auth-modal .form-control {
+    border-left: none;
+}
+
+.auth-modal .form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.25);
+}
+
+.auth-modal .input-group:focus-within .input-group-text {
+    border-color: var(--primary);
+}
+
+.auth-modal .btn-primary {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border: none;
+    padding: 0.75rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.auth-modal .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+}
+
+.auth-modal .btn-outline-primary {
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.auth-modal .btn-outline-primary:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Login Button in Navigation */
+.btn-login {
+    background: white;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    padding: 0.5rem 1.2rem;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-login:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.3);
+}
+
+.btn-login i {
+    font-size: 0.85rem;
+}
+
+/* User Profile Button */
+.btn-user-profile {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border: none;
+    color: white;
+    padding: 0.5rem 1.2rem;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-user-profile:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+    color: white;
+}
+
+.btn-user-profile::after {
+    display: none;
+}
+
+/* User Dropdown Menu */
+.dropdown-menu {
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.dropdown-item {
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    transition: all 0.2s ease;
+    color: var(--text-primary);
+}
+
+.dropdown-item:hover {
+    background: var(--bg-secondary);
+    color: var(--primary);
+    transform: translateX(5px);
+}
+
+.dropdown-item i {
+    width: 20px;
+}
+
+.dropdown-divider {
+    margin: 0.5rem 0;
+}
+
+/* Auth Notification */
+.auth-notification {
+    position: fixed;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    color: #333;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    z-index: 10001;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    min-width: 300px;
+    max-width: 90%;
+}
+
+.auth-notification.show {
+    top: 80px;
+}
+
+.auth-notification-success {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+}
+
+.auth-notification-error {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+}
+
+.auth-notification-warning {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: white;
+}
+
+.auth-notification-info {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+}
+
+/* Dark Mode Support */
+[data-theme="dark"] .auth-modal {
+    background: var(--card-bg);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .auth-modal .modal-body {
+    background: var(--card-bg);
+}
+
+[data-theme="dark"] .auth-modal .input-group-text {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--primary);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .auth-modal .form-control {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .dropdown-menu {
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .dropdown-item {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .auth-modal .modal-body {
+        padding: 1.5rem;
+    }
+    
+    .btn-login,
+    .btn-user-profile {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+}

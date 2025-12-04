@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initParticles();
     initAOS();
     initNewsletterForm();
+    initSearchButton();
 });
 
 // ================================================
@@ -579,6 +580,32 @@ if ('PerformanceObserver' in window) {
     });
     
     observer.observe({ entryTypes: ['measure', 'navigation'] });
+}
+
+// ================================================
+// Search Food Button
+// ================================================
+function initSearchButton() {
+    const searchBtn = document.getElementById('searchFoodBtn');
+    if (!searchBtn) return;
+    
+    searchBtn.addEventListener('click', function() {
+        // Focus on delivery address input
+        const addressInput = document.getElementById('deliveryAddress');
+        if (addressInput) {
+            // Smooth scroll to hero section
+            const heroSection = document.getElementById('home');
+            if (heroSection) {
+                heroSection.scrollIntoView({ behavior: 'smooth' });
+            }
+            
+            // Focus and highlight the input after scroll
+            setTimeout(() => {
+                addressInput.focus();
+                addressInput.select();
+            }, 500);
+        }
+    });
 }
 
 // ================================================

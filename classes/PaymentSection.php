@@ -16,25 +16,37 @@ class PaymentSection {
                 'icon' => 'credit-card',
                 'name' => 'Credit/Debit Card',
                 'description' => 'Pay securely with your card',
-                'badges' => ['Visa', 'Mastercard', 'Amex']
+                'badges' => [
+                    ['text' => 'Visa', 'logo' => 'fab fa-cc-visa'],
+                    ['text' => 'Mastercard', 'logo' => 'fab fa-cc-mastercard'],
+                    ['text' => 'Amex', 'logo' => 'fab fa-cc-amex']
+                ]
             ],
             [
                 'icon' => 'wallet',
                 'name' => 'Digital Wallet',
                 'description' => 'Quick payment with digital wallets',
-                'badges' => ['PayPal', 'Apple Pay', 'Google Pay']
+                'badges' => [
+                    ['text' => 'PayPal', 'logo' => 'fab fa-cc-paypal'],
+                    ['text' => 'Apple Pay', 'logo' => 'fab fa-apple-pay'],
+                    ['text' => 'Google Pay', 'logo' => 'fab fa-google-pay']
+                ]
             ],
             [
                 'icon' => 'money-bill-wave',
                 'name' => 'Cash on Delivery',
                 'description' => 'Pay when you receive your order',
-                'badges' => ['Available']
+                'badges' => [
+                    ['text' => 'Available', 'logo' => null]
+                ]
             ],
             [
                 'icon' => 'university',
                 'name' => 'Net Banking',
                 'description' => 'Pay directly from your bank account',
-                'badges' => ['All Banks']
+                'badges' => [
+                    ['text' => 'All Banks', 'logo' => null]
+                ]
             ]
         ];
     }
@@ -59,7 +71,12 @@ class PaymentSection {
                             <p class="text-muted small"><?php echo htmlspecialchars($method['description']); ?></p>
                             <div class="payment-badges mt-3">
                                 <?php foreach ($method['badges'] as $badge): ?>
-                                <span class="badge bg-light text-dark"><?php echo htmlspecialchars($badge); ?></span>
+                                <span class="badge bg-light text-dark border">
+                                    <?php if ($badge['logo']): ?>
+                                    <i class="<?php echo $badge['logo']; ?> me-1"></i>
+                                    <?php endif; ?>
+                                    <?php echo htmlspecialchars($badge['text']); ?>
+                                </span>
                                 <?php endforeach; ?>
                             </div>
                         </div>

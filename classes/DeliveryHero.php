@@ -42,9 +42,18 @@ class DeliveryHero {
                                 </span>
                                 <input type="text" class="form-control" id="deliveryAddress" 
                                        placeholder="<?php echo htmlspecialchars($this->searchPlaceholder); ?>">
-                                <button class="btn btn-primary" type="button">
+                                <button class="btn btn-outline-secondary" type="button" id="getCurrentLocation" title="Use my current location">
+                                    <i class="fas fa-crosshairs"></i>
+                                </button>
+                                <button class="btn btn-primary" type="button" id="findFoodBtn">
                                     <i class="fas fa-search me-2"></i>Find Food
                                 </button>
+                            </div>
+                            <div class="location-info mt-2" id="locationInfo" style="display: none;">
+                                <small class="text-muted">
+                                    <i class="fas fa-check-circle text-success me-1"></i>
+                                    <span id="selectedLocation"></span>
+                                </small>
                             </div>
                         </div>
                         
@@ -126,6 +135,44 @@ class DeliveryHero {
                 </a>
             </div>
         </section>
+
+        <!-- Google Map Modal -->
+        <div class="modal fade" id="mapModal" tabindex="-1" aria-labelledby="mapModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="mapModalLabel">
+                            <i class="fas fa-map-marked-alt me-2"></i>Select Your Location
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-0">
+                        <div class="map-instructions">
+                            <i class="fas fa-info-circle me-2"></i>
+                            Drag the marker to adjust your exact location
+                        </div>
+                        <div id="map" style="height: 450px; width: 100%;"></div>
+                        <div class="map-address-display">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-map-marker-alt text-primary me-2"></i>
+                                <div class="flex-grow-1">
+                                    <small class="text-muted d-block">Selected Address:</small>
+                                    <strong id="mapSelectedAddress">Detecting location...</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            <i class="fas fa-times me-2"></i>Cancel
+                        </button>
+                        <button type="button" class="btn btn-primary" id="confirmLocation">
+                            <i class="fas fa-check me-2"></i>Confirm Location
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <?php
     }
 }

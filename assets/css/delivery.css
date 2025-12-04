@@ -428,6 +428,196 @@
     transform: scale(1.05);
 }
 
+.delivery-search-box .btn-outline-secondary {
+    background: white;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    padding: 0.75rem 1rem;
+    border-radius: 0;
+}
+
+.delivery-search-box .btn-outline-secondary:hover {
+    background: var(--primary);
+    color: white;
+    transform: scale(1.05);
+}
+
+.delivery-search-box .btn-primary {
+    border-radius: 0 40px 40px 0;
+}
+
+/* Location Info */
+.location-info {
+    padding: 0.5rem 1rem;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Location Notification */
+.location-notification {
+    position: fixed;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    color: #333;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    min-width: 300px;
+    max-width: 90%;
+}
+
+.location-notification.show {
+    top: 20px;
+}
+
+.location-notification-success {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+}
+
+.location-notification-error {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+}
+
+.location-notification-warning {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: white;
+}
+
+.location-notification-info {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+}
+
+/* Google Maps Autocomplete Styling */
+.pac-container {
+    border-radius: 12px;
+    margin-top: 5px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    border: none;
+    font-family: 'Poppins', sans-serif;
+}
+
+.pac-item {
+    padding: 12px 15px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.pac-item:hover {
+    background: #f3f4f6;
+}
+
+.pac-icon {
+    margin-right: 10px;
+}
+
+.pac-item-query {
+    color: #333;
+    font-weight: 500;
+}
+
+/* Map Modal Styles */
+.modal-content {
+    border-radius: 16px;
+    border: none;
+}
+
+.modal-header {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border-radius: 16px 16px 0 0;
+    padding: 1.25rem 1.5rem;
+}
+
+.modal-header .btn-close {
+    filter: brightness(0) invert(1);
+}
+
+.map-instructions {
+    background: #e3f2fd;
+    color: #1565c0;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-bottom: 1px solid #bbdefb;
+}
+
+.map-address-display {
+    background: #f8f9fa;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #dee2e6;
+}
+
+.map-address-display strong {
+    color: #333;
+    font-size: 0.95rem;
+}
+
+.map-address-display small {
+    font-size: 0.75rem;
+}
+
+#map {
+    border: none;
+}
+
+.modal-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #dee2e6;
+}
+
+.modal-footer .btn {
+    padding: 0.6rem 1.5rem;
+    font-weight: 600;
+    border-radius: 8px;
+}
+
+/* Dark theme map modal */
+[data-theme="dark"] .modal-content {
+    background: var(--card-bg);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .map-instructions {
+    background: rgba(33, 150, 243, 0.2);
+    color: #64b5f6;
+    border-bottom-color: rgba(33, 150, 243, 0.3);
+}
+
+[data-theme="dark"] .map-address-display {
+    background: rgba(0, 0, 0, 0.2);
+    border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .map-address-display strong {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .modal-footer {
+    border-top-color: rgba(255, 255, 255, 0.1);
+}
+
 [data-theme="dark"] .delivery-search-box {
     background: var(--card-bg);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
@@ -715,29 +905,34 @@
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 20px rgba(255, 107, 53, 0.4);
     transition: all 0.3s ease;
     z-index: 9998;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .cart-toggle-btn:hover {
     transform: scale(1.1);
+    box-shadow: 0 6px 30px rgba(255, 107, 53, 0.6);
 }
 
 .cart-count {
     position: absolute;
-    top: -5px;
-    right: -5px;
+    top: -8px;
+    right: -8px;
     background: #ef4444;
     color: white;
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 700;
+    border: 2px solid white;
 }
 
 .cart-count.hidden {

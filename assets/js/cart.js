@@ -262,24 +262,38 @@ class ShoppingCart {
             return;
         }
 
-        // Here you would typically redirect to checkout page or open checkout modal
+        // Check if user is logged in
+        if (!window.authSystem || !window.authSystem.checkAuthState()) {
+            this.showNotification('Please login to proceed to checkout', 'warning');
+            document.getElementById('cartSidebar').classList.remove('active');
+            setTimeout(() => {
+                const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+                loginModal.show();
+            }, 300);
+            return;
+        }
+
+        // Proceed to checkout if logged in
         const total = this.getTotal();
         const itemCount = this.getItemCount();
+        const user = window.authSystem.getCurrentUser();
         
         const confirmed = confirm(
             `Proceed to checkout?\n\n` +
+            `Customer: ${user.name}\n` +
             `Items: ${itemCount}\n` +
             `Total: $${total.toFixed(2)}\n\n` +
-            `(In a real application, this would take you to the checkout page)`
+            `(In a real application, this would take you to the payment page)`
         );
 
         if (confirmed) {
-            this.showNotification('Redirecting to checkout...', 'success');
+            this.showNotification('Processing your order...', 'success');
             // Simulate checkout process
             setTimeout(() => {
+                const orderId = 'ORD' + Date.now();
                 this.clearCart();
                 document.getElementById('cartSidebar').classList.remove('active');
-                this.showNotification('Order placed successfully! (Demo)', 'success');
+                this.showNotification(`Order #${orderId} placed successfully!`, 'success');
             }, 1500);
         }
     }
