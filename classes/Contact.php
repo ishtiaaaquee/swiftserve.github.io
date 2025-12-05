@@ -13,10 +13,10 @@ class ContactSection {
     
     public function __construct() {
         $this->title = 'Get In Touch';
-        $this->subtitle = "Let's discuss your next project";
-        $this->address = '123 Business Street, New York, NY 10001';
-        $this->phone = '+1 (555) 123-4567';
-        $this->email = 'hello@swiftserve.com';
+        $this->subtitle = "Have questions? We're here to help!";
+        $this->address = 'Banani, Dhaka 1213, Bangladesh';
+        $this->phone = '+880 1721-346909';
+        $this->email = 'support@swiftserve.bd';
         $this->socialLinks = [
             ['icon' => 'facebook-f', 'url' => '#'],
             ['icon' => 'twitter', 'url' => '#'],

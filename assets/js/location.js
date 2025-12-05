@@ -58,8 +58,17 @@ function reverseGeocode(lat, lng) {
     addressDisplay.textContent = 'Detecting location...';
     
     // Use Nominatim API for reverse geocoding
-    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`)
-        .then(response => response.json())
+    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`, {
+        headers: {
+            'User-Agent': 'SwiftServe Food Delivery App'
+        }
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Geocoding service unavailable');
+            }
+            return response.json();
+        })
         .then(data => {
             if (data && data.display_name) {
                 const address = data.display_name;
@@ -70,12 +79,22 @@ function reverseGeocode(lat, lng) {
                 window.tempLng = lng;
                 window.tempAddress = address;
             } else {
-                addressDisplay.textContent = 'Unable to detect address. Please try dragging the marker.';
+                // Fallback to generic address
+                const fallbackAddress = `Location: ${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+                addressDisplay.textContent = fallbackAddress;
+                window.tempLat = lat;
+                window.tempLng = lng;
+                window.tempAddress = fallbackAddress;
             }
         })
         .catch(error => {
             console.error('Geocoding error:', error);
-            addressDisplay.textContent = 'Error detecting address. Please try again.';
+            // Set fallback address instead of error
+            const fallbackAddress = `Custom Location (${lat.toFixed(4)}, ${lng.toFixed(4)})`;
+            addressDisplay.textContent = fallbackAddress;
+            window.tempLat = lat;
+            window.tempLng = lng;
+            window.tempAddress = fallbackAddress;
         });
 }
 

@@ -27,9 +27,9 @@ class Footer {
             ['text' => 'Corporate Catering', 'url' => '#']
         ];
         $this->contactInfo = [
-            ['icon' => 'map-marker-alt', 'text' => 'Serving 50+ Cities Nationwide'],
-            ['icon' => 'phone', 'text' => '1-800-FOOD-NOW'],
-            ['icon' => 'envelope', 'text' => 'support@swiftserve.com']
+            ['icon' => 'map-marker-alt', 'text' => 'Banani, Dhaka 1213, Bangladesh'],
+            ['icon' => 'phone', 'text' => '+880 1721-346909'],
+            ['icon' => 'envelope', 'text' => 'support@swiftserve.bd']
         ];
         $this->socialLinks = [
             ['icon' => 'facebook-f', 'url' => '#'],

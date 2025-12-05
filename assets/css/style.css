@@ -564,8 +564,13 @@ body.dark-mode .gradient-overlay {
 }
 
 /* Portfolio Styles */
-.portfolio-filter {
+.portfolio-filter,
+.category-filter {
     margin-bottom: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
 .filter-btn {

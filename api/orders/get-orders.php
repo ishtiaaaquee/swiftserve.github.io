@@ -27,8 +27,7 @@ try {
     // Get all orders for the user
     $orders = $db->fetchAll(
         "SELECT o.*, r.name as restaurant_name, r.logo as restaurant_logo,
-                CONCAT(a.street, ', ', a.area, 
-                       CASE WHEN a.postal_code IS NOT NULL THEN CONCAT(', ', a.postal_code) ELSE '' END) as delivery_address
+                CONCAT(a.street_address, ', ', a.area, ', ', a.city) as delivery_address
          FROM orders o
          LEFT JOIN restaurants r ON o.restaurant_id = r.id
          LEFT JOIN user_addresses a ON o.delivery_address_id = a.id
@@ -47,15 +46,19 @@ try {
             ['order_id' => $order['id']]
         );
         
-        // Process items to get name from customizations if menu_item doesn't exist
+        // Process items to use item_name from order_items table
         foreach ($items as &$item) {
-            if (!$item['menu_item_name'] && $item['customizations']) {
+            // Use the item_name stored in order_items table (always present)
+            $item['display_name'] = $item['item_name'];
+            
+            // Use image from menu_items if available, otherwise from customizations
+            if ($item['menu_item_image']) {
+                $item['display_image'] = $item['menu_item_image'];
+            } else if ($item['customizations']) {
                 $customizations = json_decode($item['customizations'], true);
-                $item['item_name'] = $customizations['item_name'] ?? 'Unknown Item';
-                $item['item_image'] = $customizations['image'] ?? null;
+                $item['display_image'] = $customizations['image'] ?? null;
             } else {
-                $item['item_name'] = $item['menu_item_name'];
-                $item['item_image'] = $item['menu_item_image'];
+                $item['display_image'] = null;
             }
         }
         

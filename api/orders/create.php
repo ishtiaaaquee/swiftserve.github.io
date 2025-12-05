@@ -82,18 +82,14 @@ try {
     $addressId = $db->insert('user_addresses', [
         'user_id' => $userId,
         'label' => 'Delivery Address',
-        'street' => $data['address']['street'],
+        'street_address' => $data['address']['street'],
         'area' => $data['address']['area'],
-        'postal_code' => $data['address']['postalCode'] ?? null,
         'city' => 'Dhaka',
         'is_default' => 0
     ]);
     
     // Generate order number
     $orderNumber = 'SWS' . str_pad(rand(10000000, 99999999), 8, '0', STR_PAD_LEFT);
-    
-    // Calculate estimated delivery time (45 minutes from now)
-    $estimatedDelivery = date('Y-m-d H:i:s', strtotime('+45 minutes'));
     
     // Insert order
     $orderId = $db->insert('orders', [
@@ -104,13 +100,10 @@ try {
         'total_amount' => $total,
         'delivery_fee' => $deliveryFee,
         'subtotal' => $subtotal,
-        'tax' => 0,
-        'discount' => 0,
         'delivery_instructions' => $data['deliveryInstructions'] ?? null,
         'payment_method' => $data['paymentMethod'] ?? 'cash',
         'payment_status' => ($data['paymentMethod'] ?? 'cash') === 'cash' ? 'pending' : 'paid',
-        'order_status' => 'pending',
-        'estimated_delivery' => $estimatedDelivery
+        'order_status' => 'pending'
     ]);
     
     // Insert order items
@@ -128,19 +121,23 @@ try {
         $db->insert('order_items', [
             'order_id' => $orderId,
             'menu_item_id' => $menuItemId,
+            'item_name' => $item['name'],
             'quantity' => $item['quantity'],
             'unit_price' => $item['price'],
             'total_price' => $item['price'] * $item['quantity'],
             'customizations' => json_encode([
-                'item_name' => $item['name'],
                 'image' => $item['image'] ?? null
-            ]),
-            'special_request' => null
+            ])
         ]);
     }
     
-    // Update user's total orders count
-    $db->getPDO()->exec("UPDATE users SET total_orders = total_orders + 1 WHERE id = $userId");
+    // Update user's stats and loyalty points (1 point per ৳1 spent)
+    $loyaltyPoints = floor($total); // 1 point per taka
+    $db->getPDO()->exec("UPDATE users 
+                         SET total_orders = total_orders + 1,
+                             total_spent = total_spent + $total,
+                             loyalty_points = loyalty_points + $loyaltyPoints 
+                         WHERE id = $userId");
     
     // Commit transaction
     $db->getPDO()->commit();

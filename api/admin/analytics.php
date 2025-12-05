@@ -41,7 +41,7 @@ try {
     $stats['total_customers'] = $result['count'];
     
     // Active restaurants
-    $result = $db->fetchOne("SELECT COUNT(*) as count FROM restaurants WHERE is_active = 1");
+    $result = $db->fetchOne("SELECT COUNT(*) as count FROM restaurants WHERE is_open = 1");
     $stats['total_restaurants'] = $result['count'];
     
     // Recent orders (last 10)
@@ -76,7 +76,7 @@ try {
                 r.rating
          FROM restaurants r
          LEFT JOIN orders o ON r.id = o.restaurant_id
-         WHERE r.is_active = 1
+         WHERE r.is_open = 1
          GROUP BY r.id
          ORDER BY revenue DESC
          LIMIT 10"
@@ -95,14 +95,13 @@ try {
     
     // Popular items
     $popularItems = $db->fetchAll(
-        "SELECT COALESCE(mi.name, JSON_UNQUOTE(JSON_EXTRACT(oi.customizations, '$.item_name'))) as item_name,
+        "SELECT oi.item_name,
                 SUM(oi.quantity) as total_quantity,
                 SUM(oi.total_price) as total_revenue
          FROM order_items oi
-         LEFT JOIN menu_items mi ON oi.menu_item_id = mi.id
          JOIN orders o ON oi.order_id = o.id
          WHERE o.created_at >= DATE_SUB(NOW(), INTERVAL 30 DAY)
-         GROUP BY item_name
+         GROUP BY oi.item_name
          ORDER BY total_quantity DESC
          LIMIT 10"
     );

@@ -56,9 +56,9 @@ class TestimonialsSection {
         $this->title = 'What Clients Say';
         $this->subtitle = "Don't just take our word for it";
         $this->testimonials = [
-            new Testimonial('John Smith', 'CEO', 'TechCorp', 'Outstanding work! The team delivered exactly what we needed, on time and within budget. Highly recommended!', 5, 'https://i.pravatar.cc/100?img=1'),
-            new Testimonial('Sarah Johnson', 'Founder', 'StartupHub', 'Incredible attention to detail and amazing customer service. They went above and beyond our expectations!', 5, 'https://i.pravatar.cc/100?img=5'),
-            new Testimonial('Michael Chen', 'Director', 'InnovateCo', 'Best investment we\'ve made for our business. The results speak for themselves. Thank you!', 5, 'https://i.pravatar.cc/100?img=3')
+            new Testimonial('Ishtiaque Ahmed', 'Student', 'North South University', 'Amazing service! Ordered kacchi biryani and it arrived hot within 30 minutes. The food quality was excellent and delivery guy was very polite. Highly recommended!', 5, 'https://i.pravatar.cc/100?img=12'),
+            new Testimonial('Nafis Adnan', 'Graduate Student', 'MIT', 'Best food delivery app in Dhaka! I use it almost daily for lunch. Great variety of restaurants and the live tracking feature is really helpful. Customer support is also very responsive.', 5, 'https://i.pravatar.cc/100?img=33'),
+            new Testimonial('Noman Sakib', 'MBA Student', 'Harvard Business School', 'SwiftServe has become my go-to app for office lunch orders. Fast delivery, affordable prices, and authentic Bengali food. The loyalty points system is a great bonus!', 5, 'https://i.pravatar.cc/100?img=51')
         ];
     }
     

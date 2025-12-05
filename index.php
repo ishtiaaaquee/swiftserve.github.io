@@ -138,9 +138,10 @@ $features->addFeature(new Feature('star', 'Quality Food', 'Only the best restaur
     <?php $page->renderScripts(); ?>
     
     <!-- Food Delivery Custom Scripts -->
-    <script src="assets/js/restaurant-menu.js"></script>
-    <script src="assets/js/cart.js"></script>
-    <script src="assets/js/delivery.js"></script>
+    <script src="assets/js/restaurant-menu.js?v=<?php echo time(); ?>"></script>
+    <script src="assets/js/restaurant-filter.js?v=<?php echo time(); ?>"></script>
+    <script src="assets/js/cart.js?v=<?php echo time(); ?>"></script>
+    <script src="assets/js/delivery.js?v=<?php echo time(); ?>"></script>
     
     <script>
     // Verify cart.js loaded and initialized

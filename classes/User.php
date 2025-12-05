@@ -46,9 +46,6 @@ class User {
             ];
         }
         
-        // Generate referral code
-        $referralCode = $this->generateReferralCode($data['email']);
-        
         // Hash password
         $passwordHash = password_hash($data['password'], PASSWORD_BCRYPT, ['cost' => 12]);
         
@@ -57,9 +54,7 @@ class User {
             'email' => $data['email'],
             'password_hash' => $passwordHash,
             'full_name' => $data['full_name'],
-            'phone' => $data['phone'] ?? null,
-            'referral_code' => $referralCode,
-            'created_at' => date('Y-m-d H:i:s')
+            'phone' => $data['phone'] ?? null
         ];
         
         try {
@@ -68,7 +63,7 @@ class User {
             
             // Get created user (without password)
             $user = $this->db->fetchOne(
-                "SELECT id, email, full_name, phone, referral_code, loyalty_points, created_at 
+                "SELECT id, email, full_name, phone, loyalty_points, created_at 
                  FROM users WHERE id = ?",
                 [$userId]
             );
@@ -113,14 +108,6 @@ class User {
             ];
         }
         
-        // Check if account is blocked
-        if ($user['is_blocked']) {
-            return [
-                'success' => false,
-                'message' => 'Your account has been blocked. Please contact support.'
-            ];
-        }
-        
         // Verify password
         if (!password_verify($password, $user['password_hash'])) {
             return [
@@ -152,8 +139,8 @@ class User {
      */
     public function getUserById($userId) {
         $user = $this->db->fetchOne(
-            "SELECT id, email, full_name, phone, avatar, date_of_birth, gender, 
-                    loyalty_points, total_orders, total_spent, referral_code, created_at, last_login
+            "SELECT id, email, full_name, phone, 
+                    loyalty_points, total_orders, total_spent, created_at, last_login
              FROM users 
              WHERE id = ? AND is_active = 1",
             [$userId]
@@ -167,7 +154,7 @@ class User {
      */
     public function getUserByEmail($email) {
         $user = $this->db->fetchOne(
-            "SELECT id, email, full_name, phone, avatar, loyalty_points, created_at
+            "SELECT id, email, full_name, phone, loyalty_points, created_at
              FROM users 
              WHERE email = ? AND is_active = 1",
             [$email]
@@ -180,7 +167,7 @@ class User {
      * Update user profile
      */
     public function updateProfile($userId, $data) {
-        $allowedFields = ['full_name', 'phone', 'avatar', 'date_of_birth', 'gender'];
+        $allowedFields = ['full_name', 'phone'];
         $updateData = [];
         
         foreach ($allowedFields as $field) {
@@ -291,11 +278,10 @@ class User {
                 total_orders,
                 total_spent,
                 loyalty_points,
-                (SELECT COUNT(*) FROM user_favorites WHERE user_id = ?) as favorite_count,
                 (SELECT COUNT(*) FROM user_addresses WHERE user_id = ?) as address_count
              FROM users 
              WHERE id = ?",
-            [$userId, $userId, $userId]
+            [$userId, $userId]
         );
     }
 }

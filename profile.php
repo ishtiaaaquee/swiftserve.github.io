@@ -367,10 +367,6 @@ if (!$user) {
                                         <span class="badge bg-success">Active</span>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <strong>Referral Code:</strong><br>
-                                        <code style="background: white; padding: 5px 10px; border-radius: 5px;"><?php echo $user['referral_code']; ?></code>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
                                         <strong>Total Spent:</strong><br>
                                         <span class="text-muted">৳<?php echo number_format($user['total_spent'], 2); ?></span>
                                     </div>
@@ -407,29 +403,9 @@ if (!$user) {
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-label">Phone Number</label>
-                                        <input type="tel" class="form-control" id="phone" value="<?php echo htmlspecialchars($user['phone'] ?? ''); ?>">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-label">Date of Birth</label>
-                                        <input type="date" class="form-control" id="dateOfBirth" value="<?php echo $user['date_of_birth'] ?? ''; ?>">
-                                    </div>
-                                </div>
-                            </div>
-
                             <div class="form-group">
-                                <label class="form-label">Gender</label>
-                                <select class="form-control" id="gender">
-                                    <option value="">Select Gender</option>
-                                    <option value="male" <?php echo ($user['gender'] ?? '') === 'male' ? 'selected' : ''; ?>>Male</option>
-                                    <option value="female" <?php echo ($user['gender'] ?? '') === 'female' ? 'selected' : ''; ?>>Female</option>
-                                    <option value="other" <?php echo ($user['gender'] ?? '') === 'other' ? 'selected' : ''; ?>>Other</option>
-                                </select>
+                                <label class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" id="phone" value="<?php echo htmlspecialchars($user['phone'] ?? ''); ?>">
                             </div>
 
                             <button type="submit" class="btn btn-primary">
@@ -608,7 +584,7 @@ if (!$user) {
                                             ${order.items.map(item => `
                                                 <li class="mb-1">
                                                     <i class="fas fa-utensils text-muted me-2"></i>
-                                                    ${item.quantity}x ${item.item_name || 'Item'} - ৳${parseFloat(item.total_price).toFixed(0)}
+                                                    ${item.quantity}x ${item.display_name || item.item_name || 'Item'} - ৳${parseFloat(item.total_price).toFixed(0)}
                                                 </li>
                                             `).join('')}
                                         </ul>
@@ -683,9 +659,8 @@ if (!$user) {
                                             ${address.label || 'Delivery Address'}
                                             ${address.is_default == 1 ? '<span class="badge bg-primary ms-2">Default</span>' : ''}
                                         </h5>
-                                        <p class="mb-1">${address.street}</p>
+                                        <p class="mb-1">${address.street_address}</p>
                                         <p class="mb-1">${address.area}, ${address.city || 'Dhaka'}</p>
-                                        ${address.postal_code ? `<p class="mb-1">Postal Code: ${address.postal_code}</p>` : ''}
                                         ${address.landmark ? `<p class="mb-1 text-muted"><i class="fas fa-info-circle me-1"></i>${address.landmark}</p>` : ''}
                                     </div>
                                     <div>
@@ -767,9 +742,7 @@ if (!$user) {
             
             const formData = {
                 full_name: document.getElementById('fullName').value,
-                phone: document.getElementById('phone').value,
-                date_of_birth: document.getElementById('dateOfBirth').value || null,
-                gender: document.getElementById('gender').value || null
+                phone: document.getElementById('phone').value
             };
 
             try {
