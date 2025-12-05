@@ -5,20 +5,32 @@
 
 class ShoppingCart {
     constructor() {
+        console.log('🏗️ ShoppingCart constructor called');
         this.items = this.loadCart();
+        console.log('📦 Loaded cart items:', this.items);
         this.init();
     }
 
     init() {
+        console.log('⚙️ Initializing cart...');
         this.updateCartUI();
         this.attachEventListeners();
+        console.log('✅ Cart initialization complete');
     }
 
     attachEventListeners() {
+        console.log('📎 Attaching cart event listeners...');
+        
         // Cart toggle button
         const cartToggleBtn = document.getElementById('cartToggleBtn');
         const cartSidebar = document.getElementById('cartSidebar');
         const closeCartBtn = document.getElementById('closeCart');
+        
+        console.log('Cart elements found:', {
+            toggleBtn: !!cartToggleBtn,
+            sidebar: !!cartSidebar,
+            closeBtn: !!closeCartBtn
+        });
         
         if (cartToggleBtn) {
             cartToggleBtn.addEventListener('click', () => {
@@ -41,21 +53,47 @@ class ShoppingCart {
             }
         });
 
-        // Add to cart buttons
+        // Add to cart buttons - handles both menu cards and modal menu items
         document.addEventListener('click', (e) => {
-            if (e.target.closest('.btn-add-to-cart')) {
-                const btn = e.target.closest('.btn-add-to-cart');
-                const card = btn.closest('.menu-item-card');
+            if (e.target.closest('.btn-add-to-cart') || e.target.closest('.add-to-cart')) {
+                console.log('🔔 Add to cart button clicked!');
+                const btn = e.target.closest('.btn-add-to-cart') || e.target.closest('.add-to-cart');
+                console.log('Button:', btn);
+                console.log('Button data:', btn.dataset);
                 
-                const item = {
-                    id: card.dataset.id,
-                    name: card.dataset.name,
-                    price: parseFloat(card.dataset.price),
-                    image: card.querySelector('img')?.src || 'assets/images/placeholder.jpg'
-                };
+                // Try to get data from the button's data attributes first (modal menu items)
+                let item;
+                if (btn.dataset.id) {
+                    item = {
+                        id: btn.dataset.id,
+                        name: btn.dataset.name,
+                        price: parseFloat(btn.dataset.price),
+                        image: btn.dataset.image || 'assets/images/placeholder.jpg'
+                    };
+                    console.log('✅ Item created from button data:', item);
+                } else {
+                    // Fallback to card-based data (regular menu cards)
+                    const card = btn.closest('.menu-item-card');
+                    if (card) {
+                        item = {
+                            id: card.dataset.id,
+                            name: card.dataset.name,
+                            price: parseFloat(card.dataset.price),
+                            image: card.querySelector('img')?.src || 'assets/images/placeholder.jpg'
+                        };
+                        console.log('✅ Item created from card data:', item);
+                    } else {
+                        console.error('❌ Could not find menu card');
+                    }
+                }
 
-                this.addItem(item);
-                this.showAddedNotification(item.name);
+                if (item) {
+                    console.log('📦 Adding item to cart:', item);
+                    this.addItem(item);
+                    this.showAddedNotification(item.name);
+                } else {
+                    console.error('❌ No item data found!');
+                }
             }
         });
 
@@ -139,7 +177,7 @@ class ShoppingCart {
 
         // Update total
         if (cartTotal) {
-            cartTotal.textContent = `$${this.getTotal().toFixed(2)}`;
+            cartTotal.textContent = `৳${this.getTotal().toFixed(0)}`;
         }
 
         // Enable/disable checkout button
@@ -158,21 +196,21 @@ class ShoppingCart {
                 `;
             } else {
                 cartItems.innerHTML = this.items.map(item => `
-                    <div class="cart-item" data-id="${item.id}">
-                        <img src="${item.image}" alt="${item.name}" class="cart-item-image">
-                        <div class="cart-item-details">
-                            <div class="cart-item-name">${item.name}</div>
-                            <div class="cart-item-price">$${item.price.toFixed(2)}</div>
-                            <div class="cart-item-controls">
-                                <button class="qty-btn qty-decrease" data-id="${item.id}">
-                                    <i class="fas fa-minus"></i>
+                    <div class="cart-item" data-id="${item.id}" style="display: flex; gap: 12px; padding: 15px; border-bottom: 1px solid #e5e7eb; animation: slideIn 0.3s ease;">
+                        <img src="${item.image}" alt="${item.name}" class="cart-item-image" style="width: 70px; height: 70px; object-fit: cover; border-radius: 8px; flex-shrink: 0;">
+                        <div class="cart-item-details" style="flex: 1; display: flex; flex-direction: column; gap: 8px;">
+                            <div class="cart-item-name" style="font-weight: 600; color: #2b2d42; font-size: 0.95rem;">${item.name}</div>
+                            <div class="cart-item-price" style="color: #ff6b35; font-weight: 700; font-size: 1rem;">৳${item.price.toFixed(0)} × ${item.quantity} = ৳${(item.price * item.quantity).toFixed(0)}</div>
+                            <div class="cart-item-controls" style="display: flex; gap: 8px; align-items: center;">
+                                <button class="qty-btn qty-decrease" data-id="${item.id}" style="width: 28px; height: 28px; border: 1px solid #e5e7eb; background: white; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='white'">
+                                    <i class="fas fa-minus" style="font-size: 10px; color: #6b7280;"></i>
                                 </button>
-                                <span class="qty-display">${item.quantity}</span>
-                                <button class="qty-btn qty-increase" data-id="${item.id}">
-                                    <i class="fas fa-plus"></i>
+                                <span class="qty-display" style="min-width: 30px; text-align: center; font-weight: 600; color: #2b2d42;">${item.quantity}</span>
+                                <button class="qty-btn qty-increase" data-id="${item.id}" style="width: 28px; height: 28px; border: 1px solid #e5e7eb; background: white; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='white'">
+                                    <i class="fas fa-plus" style="font-size: 10px; color: #6b7280;"></i>
                                 </button>
-                                <button class="btn-remove-item" data-id="${item.id}">
-                                    <i class="fas fa-trash"></i> Remove
+                                <button class="btn-remove-item" data-id="${item.id}" style="margin-left: auto; color: #ef4444; background: none; border: none; cursor: pointer; padding: 6px 10px; font-size: 0.85rem; transition: all 0.2s;" onmouseover="this.style.color='#dc2626'; this.style.background='#fee2e2'; this.style.borderRadius='6px';" onmouseout="this.style.color='#ef4444'; this.style.background='none';">
+                                    <i class="fas fa-trash"></i>
                                 </button>
                             </div>
                         </div>
@@ -262,40 +300,8 @@ class ShoppingCart {
             return;
         }
 
-        // Check if user is logged in
-        if (!window.authSystem || !window.authSystem.checkAuthState()) {
-            this.showNotification('Please login to proceed to checkout', 'warning');
-            document.getElementById('cartSidebar').classList.remove('active');
-            setTimeout(() => {
-                const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
-                loginModal.show();
-            }, 300);
-            return;
-        }
-
-        // Proceed to checkout if logged in
-        const total = this.getTotal();
-        const itemCount = this.getItemCount();
-        const user = window.authSystem.getCurrentUser();
-        
-        const confirmed = confirm(
-            `Proceed to checkout?\n\n` +
-            `Customer: ${user.name}\n` +
-            `Items: ${itemCount}\n` +
-            `Total: $${total.toFixed(2)}\n\n` +
-            `(In a real application, this would take you to the payment page)`
-        );
-
-        if (confirmed) {
-            this.showNotification('Processing your order...', 'success');
-            // Simulate checkout process
-            setTimeout(() => {
-                const orderId = 'ORD' + Date.now();
-                this.clearCart();
-                document.getElementById('cartSidebar').classList.remove('active');
-                this.showNotification(`Order #${orderId} placed successfully!`, 'success');
-            }, 1500);
-        }
+        // Redirect to checkout page
+        window.location.href = 'checkout.php';
     }
 }
 
@@ -337,6 +343,11 @@ const notificationStyles = `
     color: white;
 }
 
+.notification-warning {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: white;
+}
+
 [data-theme="dark"] .notification {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
@@ -346,6 +357,10 @@ const notificationStyles = `
 document.head.insertAdjacentHTML('beforeend', notificationStyles);
 
 // Initialize cart when DOM is ready
+console.log('📜 cart.js file loaded');
+
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('🚀 DOMContentLoaded fired in cart.js');
     window.cart = new ShoppingCart();
+    console.log('🛒 Shopping Cart initialized!', window.cart);
 });

@@ -138,8 +138,28 @@ $features->addFeature(new Feature('star', 'Quality Food', 'Only the best restaur
     <?php $page->renderScripts(); ?>
     
     <!-- Food Delivery Custom Scripts -->
+    <script src="assets/js/restaurant-menu.js"></script>
     <script src="assets/js/cart.js"></script>
     <script src="assets/js/delivery.js"></script>
+    
+    <script>
+    // Verify cart.js loaded and initialized
+    setTimeout(() => {
+        if (window.cart) {
+            console.log('✅ Cart is ready!', window.cart);
+        } else {
+            console.error('❌ Cart failed to initialize! Creating manually...');
+            // Try to initialize manually
+            if (typeof ShoppingCart !== 'undefined') {
+                window.cart = new ShoppingCart();
+                console.log('✅ Cart manually initialized!', window.cart);
+            } else {
+                console.error('❌ ShoppingCart class not found! cart.js failed to load!');
+            }
+        }
+    }, 1000);
+    </script>
+
 
 </body>
 </html>

@@ -34,10 +34,10 @@ class Restaurant {
         $statusClass = $this->isOpen ? 'open' : 'closed';
         $statusText = $this->isOpen ? 'Open Now' : 'Closed';
         ?>
-        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="<?php echo $delay; ?>">
-            <div class="restaurant-card">
-                <div class="restaurant-image">
-                    <img src="<?php echo htmlspecialchars($this->image); ?>" alt="<?php echo htmlspecialchars($this->name); ?>">
+        <div class="col-12 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="<?php echo $delay; ?>">
+            <div class="deal-card restaurant-card">
+                <div class="deal-image-wrapper restaurant-image">
+                    <img src="<?php echo htmlspecialchars($this->image); ?>" alt="<?php echo htmlspecialchars($this->name); ?>" class="deal-image">
                     <span class="status-badge <?php echo $statusClass; ?>"><?php echo $statusText; ?></span>
                     <div class="restaurant-overlay">
                         <button class="btn btn-light btn-sm view-menu" data-restaurant-id="<?php echo $this->id; ?>">
@@ -45,20 +45,22 @@ class Restaurant {
                         </button>
                     </div>
                 </div>
-                <div class="restaurant-content">
-                    <div class="d-flex justify-content-between align-items-start">
-                        <div>
-                            <h4><?php echo htmlspecialchars($this->name); ?></h4>
-                            <p class="cuisine-type text-muted"><?php echo htmlspecialchars($this->cuisine); ?></p>
-                        </div>
-                        <div class="rating-badge">
-                            <i class="fas fa-star"></i> <?php echo $this->rating; ?>
+                <div class="deal-content restaurant-content">
+                    <div class="d-flex justify-content-between align-items-start mb-1">
+                        <h5 class="deal-name mb-0"><?php echo htmlspecialchars($this->name); ?></h5>
+                        <div class="deal-rating rating-badge">
+                            <i class="fas fa-star"></i> 
+                            <span><?php echo $this->rating; ?>(5000+)</span>
                         </div>
                     </div>
-                    <div class="restaurant-info">
-                        <span><i class="fas fa-clock"></i> <?php echo htmlspecialchars($this->deliveryTime); ?></span>
-                        <span><i class="fas fa-bangladeshi-taka-sign"></i> Min ৳<?php echo $this->minOrder; ?></span>
+                    <p class="cuisine-type text-muted small mb-2"><i class="fas fa-utensils me-1"></i><?php echo htmlspecialchars($this->cuisine); ?></p>
+                    <div class="deal-meta restaurant-info mb-2">
+                        <span><i class="fas fa-clock me-1"></i><?php echo htmlspecialchars($this->deliveryTime); ?></span>
+                        <span><i class="fas fa-bangladeshi-taka-sign me-1"></i>Min ৳<?php echo $this->minOrder; ?></span>
                     </div>
+                    <button class="btn btn-sm btn-primary w-100 view-menu" data-restaurant-id="<?php echo $this->id; ?>" style="padding: 0.4rem; font-size: 0.85rem;">
+                        <i class="fas fa-utensils me-1"></i>View Menu
+                    </button>
                 </div>
             </div>
         </div>
@@ -82,7 +84,7 @@ class RestaurantsSection {
         $this->categories = ['All', 'Biryani', 'Bengali', 'Fast Food', 'Chinese', 'Indian', 'Desserts'];
         $this->restaurants = [
             new Restaurant(1, "Kacchi Bhai", "Biryani", 4.7, "30-45 min", 250, "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=500&h=400&fit=crop", "Famous for authentic Kacchi Biryani"),
-            new Restaurant(2, "Haji Biriyani", "Biryani", 4.6, "35-50 min", 200, "https://images.unsplash.com/photo-1633945274309-2c8a9c6e3f7d?w=500&h=400&fit=crop", "Legendary Old Dhaka biryani since 1939"),
+            new Restaurant(2, "Haji Biriyani", "Biryani", 4.6, "35-50 min", 200, "https://images.unsplash.com/photo-1642821373181-696a54913e93?w=500&h=400&fit=crop", "Legendary Old Dhaka biryani since 1939"),
             new Restaurant(3, "Kasturi Restaurant", "Bengali", 4.8, "25-40 min", 300, "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=500&h=400&fit=crop", "Traditional Bengali cuisine"),
             new Restaurant(4, "Takeout Dhaka", "Fast Food", 4.5, "20-35 min", 150, "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500&h=400&fit=crop", "Burgers, fries and American fast food"),
             new Restaurant(5, "Spice & Rice", "Chinese", 4.7, "30-45 min", 280, "https://images.unsplash.com/photo-1525755662778-989d0524087e?w=500&h=400&fit=crop", "Thai and Chinese fusion"),
@@ -101,12 +103,12 @@ class RestaurantsSection {
         ?>
         <section id="restaurants" class="py-5 section-padding">
             <div class="container">
-                <div class="text-center mb-5" data-aos="fade-up">
-                    <h2 class="section-title"><?php echo htmlspecialchars($this->title); ?></h2>
-                    <p class="section-subtitle"><?php echo htmlspecialchars($this->subtitle); ?></p>
+                <div class="mb-4" data-aos="fade-up">
+                    <h2 class="section-title mb-1"><?php echo htmlspecialchars($this->title); ?></h2>
+                    <p class="section-subtitle text-muted"><?php echo htmlspecialchars($this->subtitle); ?></p>
                 </div>
                 
-                <div class="category-filter text-center mb-4" data-aos="fade-up">
+                <div class="category-filter mb-4" data-aos="fade-up">
                     <?php foreach ($this->categories as $index => $category): ?>
                     <button class="filter-btn <?php echo $index === 0 ? 'active' : ''; ?>" data-category="<?php echo strtolower(str_replace(' ', '-', $category)); ?>">
                         <?php echo htmlspecialchars($category); ?>
@@ -114,12 +116,14 @@ class RestaurantsSection {
                     <?php endforeach; ?>
                 </div>
                 
-                <div class="row g-4" id="restaurantsGrid">
-                    <?php 
-                    foreach ($this->restaurants as $index => $restaurant) {
-                        $restaurant->render($index * 100);
-                    }
-                    ?>
+                <div class="deals-scroll-container">
+                    <div class="row g-3 flex-nowrap deals-row" id="restaurantsGrid">
+                        <?php 
+                        foreach ($this->restaurants as $index => $restaurant) {
+                            $restaurant->render($index * 100);
+                        }
+                        ?>
+                    </div>
                 </div>
             </div>
         </section>

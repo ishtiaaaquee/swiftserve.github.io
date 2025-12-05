@@ -120,13 +120,16 @@ class FeaturedDeals {
                                         <span class="me-3"><i class="far fa-clock me-1"></i><?php echo $deal['deliveryTime']; ?></span>
                                         <span class="me-3"><i class="fas fa-rupee-sign me-1"></i><?php echo $deal['cuisine']; ?></span>
                                     </div>
-                                    <div class="deal-footer">
+                                    <div class="deal-footer mb-2">
                                         <span class="deal-price">
                                             <i class="fas fa-tag me-1"></i>
                                             from ৳<?php echo $deal['minPrice']; ?> with Saver
                                             <i class="fas fa-shipping-fast ms-1 text-primary"></i>
                                         </span>
                                     </div>
+                                    <button class="btn btn-sm btn-primary w-100 view-menu" data-restaurant-id="<?php echo $deal['id']; ?>" style="padding: 0.4rem; font-size: 0.85rem;">
+                                        <i class="fas fa-utensils me-1"></i>View Menu
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -144,6 +147,7 @@ class FeaturedDeals {
                         <?php 
                         $fastDelivery = [
                             [
+                                'id' => 4,
                                 'name' => 'Takeout Dhaka',
                                 'category' => 'Fast Food',
                                 'rating' => 4.5,
@@ -157,19 +161,21 @@ class FeaturedDeals {
                                 'badges' => ['Price Match']
                             ],
                             [
+                                'id' => 2,
                                 'name' => 'Haji Biriyani',
                                 'category' => 'Biryani',
                                 'rating' => 4.6,
                                 'reviewCount' => '5000+',
                                 'deliveryTime' => '35-50 min',
                                 'minPrice' => 200,
-                                'image' => 'https://images.unsplash.com/photo-1633945274309-2c8a9c6e3f7d?w=400&h=300&fit=crop',
+                                'image' => 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=300&fit=crop',
                                 'offers' => [
                                     ['text' => '15% off ৳699: foodlover200', 'icon' => 'ticket-alt']
                                 ],
                                 'badges' => ['Price Match']
                             ],
                             [
+                                'id' => 8,
                                 'name' => 'Chillox',
                                 'category' => 'Fast Food',
                                 'rating' => 4.5,
@@ -184,6 +190,7 @@ class FeaturedDeals {
                                 'badges' => []
                             ],
                             [
+                                'id' => 9,
                                 'name' => 'Star Kabab',
                                 'category' => 'Bengali',
                                 'rating' => 4.7,
@@ -232,11 +239,14 @@ class FeaturedDeals {
                                         <span class="me-3"><i class="far fa-clock me-1"></i><?php echo $deal['deliveryTime']; ?></span>
                                         <span class="me-3"><i class="fas fa-rupee-sign me-1"></i><?php echo $deal['category']; ?></span>
                                     </div>
-                                    <div class="deal-footer">
+                                    <div class="deal-footer mb-2">
                                         <span class="deal-price">
                                             <i class="fas fa-tag me-1"></i>৳<?php echo $deal['minPrice']; ?>
                                         </span>
                                     </div>
+                                    <button class="btn btn-sm btn-primary w-100 view-menu" data-restaurant-id="<?php echo $deal['id']; ?>" style="padding: 0.4rem; font-size: 0.85rem;">
+                                        <i class="fas fa-utensils me-1"></i>View Menu
+                                    </button>
                                 </div>
                             </div>
                         </div>

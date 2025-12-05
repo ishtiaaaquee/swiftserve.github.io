@@ -149,56 +149,8 @@ class RestaurantCard {
     }
 
     init() {
-        document.addEventListener('click', (e) => {
-            if (e.target.closest('.restaurant-card')) {
-                const card = e.target.closest('.restaurant-card');
-                // Don't navigate if clicking inside the card for other actions
-                if (!e.target.closest('button')) {
-                    this.viewRestaurant(card);
-                }
-            }
-        });
-    }
-
-    viewRestaurant(card) {
-        const restaurantName = card.querySelector('.restaurant-name')?.textContent || 'Restaurant';
-        
-        // In a real application, this would navigate to restaurant detail page
-        console.log(`Viewing restaurant: ${restaurantName}`);
-        
-        // Show modal or navigate to detail page
-        this.showRestaurantModal(restaurantName);
-    }
-
-    showRestaurantModal(name) {
-        const modal = document.createElement('div');
-        modal.className = 'modal fade';
-        modal.id = 'restaurantModal';
-        modal.innerHTML = `
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">${name}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p class="text-center text-muted py-5">
-                            <i class="fas fa-utensils fa-3x mb-3"></i><br>
-                            Restaurant menu and details would appear here.<br>
-                            <small>(This is a demo - full implementation would show menu items, reviews, etc.)</small>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        `;
-        
-        document.body.appendChild(modal);
-        const bsModal = new bootstrap.Modal(modal);
-        bsModal.show();
-        
-        modal.addEventListener('hidden.bs.modal', () => {
-            modal.remove();
-        });
+        // Click handling is now managed by restaurant-menu.js
+        // This class is kept for potential future card interactions
     }
 }
 
